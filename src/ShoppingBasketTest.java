@@ -53,7 +53,6 @@ public class ShoppingBasketTest {
 	public void canGetTotalValue(){
 		basket1.addToBasket(fItem1);
 		basket1.addToBasket(gItem1);
-		
 		assertEquals(new BigDecimal("3"), basket1.total());
 	}
 
