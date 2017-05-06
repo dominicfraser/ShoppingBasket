@@ -20,11 +20,11 @@ public class DBOGOFTest {
 	@Before
 	public void before(){
 		basket = new ShoppingBasket();
-		fItem1 = new FoodItem("apple", new BigDecimal("2"));
-		fItem2 = new FoodItem("apple", new BigDecimal("2"));
-		fItem3 = new FoodItem("apple", new BigDecimal("2"));
-		fItem4 = new FoodItem("apple", new BigDecimal("2"));
-		fItem5 = new FoodItem("apple", new BigDecimal("2"));
+		fItem1 = new FoodItem("apple", new BigDecimal("2.5"));
+		fItem2 = new FoodItem("apple", new BigDecimal("2.5"));
+		fItem3 = new FoodItem("apple", new BigDecimal("2.5"));
+		fItem4 = new FoodItem("apple", new BigDecimal("2.5"));
+		fItem5 = new FoodItem("apple", new BigDecimal("2.5"));
 		gItem1 = new GarmentItem("sock", new BigDecimal("3"), "small");
 		customer = new Customer("Jake",basket);
 		BOGOFApple = new DiscountBOGOF(fItem1,"first");	
@@ -47,7 +47,7 @@ public class DBOGOFTest {
 	public void canDiscountTwo(){
 		basket.addToBasket(fItem1);
 		basket.addToBasket(fItem2);
-		assertEquals(new BigDecimal("2"), BOGOFApple.findNewTotal(customer));
+		assertEquals(new BigDecimal("2.5"), BOGOFApple.findNewTotal(customer));
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class DBOGOFTest {
 		basket.addToBasket(fItem1);
 		basket.addToBasket(fItem2);
 		basket.addToBasket(gItem1);
-		assertEquals(new BigDecimal("5"), BOGOFApple.findNewTotal(customer));
+		assertEquals(new BigDecimal("5.5"), BOGOFApple.findNewTotal(customer));
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ public class DBOGOFTest {
 		basket.addToBasket(fItem1);
 		basket.addToBasket(fItem2);
 		basket.addToBasket(fItem3);
-		assertEquals(new BigDecimal("4"), BOGOFApple.findNewTotal(customer));
+		assertEquals(new BigDecimal("5.0"), BOGOFApple.findNewTotal(customer));
 	}
 	
 	@Test
@@ -72,7 +72,7 @@ public class DBOGOFTest {
 		basket.addToBasket(fItem2);
 		basket.addToBasket(fItem3);
 		basket.addToBasket(fItem4);
-		assertEquals(new BigDecimal("4"), BOGOFApple.findNewTotal(customer));
+		assertEquals(new BigDecimal("5.0"), BOGOFApple.findNewTotal(customer));
 	}
 	
 	@Test
@@ -82,7 +82,7 @@ public class DBOGOFTest {
 		basket.addToBasket(fItem3);
 		basket.addToBasket(fItem4);
 		basket.addToBasket(gItem1);
-		assertEquals(new BigDecimal("7"), BOGOFApple.findNewTotal(customer));
+		assertEquals(new BigDecimal("8.0"), BOGOFApple.findNewTotal(customer));
 	}
 	
 	@Test
@@ -92,7 +92,7 @@ public class DBOGOFTest {
 		basket.addToBasket(fItem3);
 		basket.addToBasket(fItem4);
 		basket.addToBasket(fItem5);
-		assertEquals(new BigDecimal("6"), BOGOFApple.findNewTotal(customer));
+		assertEquals(new BigDecimal("7.5"), BOGOFApple.findNewTotal(customer));
 	}
 
 }
