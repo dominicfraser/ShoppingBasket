@@ -20,8 +20,12 @@ public class Customer {
 		this.name = name;
 	}
 
-	public ArrayList<Sellable> getBasket() {
+	public ArrayList<Sellable> getBasketArray() {
 		return basket.getBasket();
+	}
+	
+	public ShoppingBasket getBasketObject() {
+		return basket;
 	}
 
 	public void setBasket(ShoppingBasket basket) {

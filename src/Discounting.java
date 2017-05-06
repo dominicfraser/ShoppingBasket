@@ -1,6 +1,7 @@
+import java.math.BigDecimal;
 
 public interface Discounting {
-	public boolean checkCondition(Customer customer);
+	public boolean checkCondition(BigDecimal runningTotal);
 	
-	public void applyDiscount(ShoppingBasket basket);
+	public BigDecimal findNewTotal(BigDecimal runningTotal);
 }

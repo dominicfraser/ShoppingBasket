@@ -2,29 +2,32 @@ import java.math.BigDecimal;
 
 public class DiscountPercentageWhenTotalExceeds implements Discounting {
 	
-	private double percentageOff;
+	private BigDecimal percentageOff;
 	private BigDecimal total;
+	private String position;
 	
-	public DiscountPercentageWhenTotalExceeds(double percentageOff, BigDecimal total) {
+	public DiscountPercentageWhenTotalExceeds(BigDecimal percentageOff, BigDecimal total, String position) {
 		this.percentageOff = percentageOff;
 		this.total = total;
+		this.position = position;
 	}
 
 	@Override
-	public boolean checkCondition(Customer customer) {
-		if (customer.basketTotal().compareTo(this.total) == -1){
+	public boolean checkCondition(BigDecimal runningTotal) {
+		if (runningTotal.compareTo(this.total) == -1){
 			return false;
 		}
-		if (customer.basketTotal().compareTo(this.total) == 0){
+		if (runningTotal.compareTo(this.total) == 0){
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public void applyDiscount(ShoppingBasket basket) {
-		// TODO Auto-generated method stub
-
+	public BigDecimal findNewTotal(BigDecimal runningTotal) {
+		BigDecimal percentageRemaining = new BigDecimal("1").subtract(percentageOff);
+		BigDecimal newTotal  = runningTotal.multiply(percentageRemaining);
+		return newTotal;
 	}
 
 }
