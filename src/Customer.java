@@ -47,7 +47,7 @@ public class Customer {
 	}
 
 	public BigDecimal basketTotal() {
-		return basket.getTotal();
+		return basket.getDiscountedTotal();
 	}
 	
 	

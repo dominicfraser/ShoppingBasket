@@ -13,7 +13,9 @@ public class Store {
 	}
 
 	public void addActiveDiscount(Discounting discount){
-		activeDiscounts.add(discount);
+		if (!activeDiscounts.contains(discount)){
+			activeDiscounts.add(discount);
+		}
 	}
 	
 	public void removeActiveDiscount(Discounting discount){

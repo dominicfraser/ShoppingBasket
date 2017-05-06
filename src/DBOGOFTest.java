@@ -14,6 +14,7 @@ public class DBOGOFTest {
 	FoodItem fItem4;
 	FoodItem fItem5;
 	GarmentItem gItem1;
+	GarmentItem gItem2;
 	Customer customer;
 	DiscountBOGOF BOGOFApple;
 
@@ -26,6 +27,7 @@ public class DBOGOFTest {
 		fItem4 = new FoodItem("apple", new BigDecimal("2.5"));
 		fItem5 = new FoodItem("apple", new BigDecimal("2.5"));
 		gItem1 = new GarmentItem("sock", new BigDecimal("3"), "small");
+		gItem2 = new GarmentItem("sock", new BigDecimal("3"), "small");
 		customer = new Customer("Jake",basket);
 		BOGOFApple = new DiscountBOGOF(fItem1,"first");	
 	}
@@ -95,6 +97,18 @@ public class DBOGOFTest {
 		assertEquals(new BigDecimal("7.50"), BOGOFApple.findNewTotal(customer));
 		assertEquals(new BigDecimal("7.50"), customer.getBasketObject().getDiscountedTotal());
 		assertEquals(new BigDecimal("12.50"), customer.getBasketObject().getTotal());
+	}
+	
+	@Test
+	public void mixItemFive(){
+		basket.addToBasket(fItem1);
+		basket.addToBasket(fItem2);
+		basket.addToBasket(fItem3);
+		basket.addToBasket(fItem4);
+		basket.addToBasket(fItem5);
+		basket.addToBasket(gItem2);
+		
+		assertEquals(new BigDecimal("10.50"), BOGOFApple.findNewTotal(customer));
 	}
 
 }

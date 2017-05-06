@@ -1,17 +1,27 @@
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class DiscountApplier {
 
 	public static BigDecimal applyActive(Store store, Customer customer){
-		BigDecimal fullPriceTotal = customer.getBasketObject().getTotal();
 		
-		for (Discounting discount : store.getActiveDiscounts()){
-			if (discount.getPosition().equals("first")){
-				BigDecimal newTotal = discount.findNewTotal(customer);
-				customer.getBasketObject().setDiscountedTotal(newTotal);
+		ArrayList<Discounting> allActive = store.getActiveDiscounts();
+		
+			for (Discounting discount : allActive){
+				if (discount.getPosition().equals("first")){
+					discount.findNewTotal(customer);
+				}
 			}
-		}
-		
+			for (Discounting discount : allActive){
+				if (discount.getPosition().equals("middle")){
+					discount.findNewTotal(customer);
+				}
+			}
+			for (Discounting discount : allActive){
+				if (discount.getPosition().equals("last")){
+					discount.findNewTotal(customer);
+				}
+			}		
 		return customer.getBasketObject().getDiscountedTotal();
 	}
 }

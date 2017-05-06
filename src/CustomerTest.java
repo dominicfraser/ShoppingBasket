@@ -46,7 +46,7 @@ public class CustomerTest {
 	public void canGetTotalFromBasket(){
 		customer.addToBasket(fItem1);
 		customer.addToBasket(gItem1);
-		assertEquals(new BigDecimal("4"), customer.basketTotal());
+		assertEquals(new BigDecimal("4.00"), customer.basketTotal());
 	}
 
 }
