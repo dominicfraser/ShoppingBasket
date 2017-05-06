@@ -1,26 +1,21 @@
 import java.math.BigDecimal;
 
-public class DiscountPercentageWhenTotalExceeds implements Discounting {
-	
+public class DiscountPercentageIfLoyal implements Discounting {
+
 	private BigDecimal percentageOff;
-	private BigDecimal total;
 	private String position;
 	
-	public DiscountPercentageWhenTotalExceeds(BigDecimal percentageOff, BigDecimal total, String position) {
+	public DiscountPercentageIfLoyal(BigDecimal percentageOff, String position) {
 		this.percentageOff = percentageOff;
-		this.total = total;
-		this.position = position;
+		this.setPosition(position);
 	}
-
+	
 	@Override
 	public boolean checkCondition(Customer customer) {
-		if (customer.getBasketObject().getTotal().compareTo(this.total) == -1){
-			return false;
+		if (customer.isLoyaltyCard()){
+			return true;
 		}
-		if (customer.getBasketObject().getTotal().compareTo(this.total) == 0){
-			return false;
-		}
-		return true;
+		return false;
 	}
 
 	@Override

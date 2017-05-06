@@ -1,3 +1,4 @@
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class Customer {
 	}
 
 	public BigDecimal basketTotal() {
-		return basket.total();
+		return basket.getTotal();
 	}
 	
 	

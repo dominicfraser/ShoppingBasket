@@ -26,31 +26,27 @@ public class DPWTETest {
 	
 	@Test
 	public void failsCheckConditionAtZero(){
-		BigDecimal runningTotal = customer.getBasketObject().total();
-		assertEquals(false, tenperoffovertwenty.checkCondition(runningTotal));
+		assertEquals(false, tenperoffovertwenty.checkCondition(customer));
 	}
 	
 	@Test
 	public void failsCheckConditionAtTwenty(){
 		customer.addToBasket(fItem1);
-		BigDecimal runningTotal = customer.getBasketObject().total();
-		assertEquals(false, tenperoffovertwenty.checkCondition(runningTotal));
+		assertEquals(false, tenperoffovertwenty.checkCondition(customer));
 	}
 	
 	@Test
 	public void passesCheckConditionAtOverTwenty(){
 		customer.addToBasket(fItem1);
 		customer.addToBasket(gItem1);
-		BigDecimal runningTotal = customer.getBasketObject().total();
-		assertEquals(true, tenperoffovertwenty.checkCondition(runningTotal));
+		assertEquals(true, tenperoffovertwenty.checkCondition(customer));
 	}
 	
 	@Test
 	public void discountsBasket(){
 		customer.addToBasket(fItem1);
 		customer.addToBasket(fItem2);
-		BigDecimal runningTotal = customer.getBasketObject().total();
-		BigDecimal newTotal = tenperoffovertwenty.findNewTotal(runningTotal);
+		BigDecimal newTotal = tenperoffovertwenty.findNewTotal(customer);
 		assertEquals(new BigDecimal("18.9"), newTotal);
 	}
 

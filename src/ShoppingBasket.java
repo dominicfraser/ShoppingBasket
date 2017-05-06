@@ -4,9 +4,13 @@ import java.util.ArrayList;
 public class ShoppingBasket {
 	
 	private ArrayList<Sellable> basket;
+	private BigDecimal total;
+	private BigDecimal discountedTotal;
 	
 	public ShoppingBasket(){
 		this.basket = new ArrayList<Sellable>();
+		this.total = BigDecimal.ZERO;
+		this.setDiscountedTotal(BigDecimal.ZERO);
 	}
 	
 	public ArrayList<Sellable> getBasket(){
@@ -15,10 +19,12 @@ public class ShoppingBasket {
 	
 	public void addToBasket(Sellable item){
         basket.add(item);
+        total = total.add(item.getPrice());
     }
 	
 	public void removeFromBasket(Sellable item){
 		basket.remove(item);
+		total = total.subtract(item.getPrice());
 	}
 
     public int amountOfItems(){
@@ -29,13 +35,16 @@ public class ShoppingBasket {
     	basket.clear();
     }
 
-	public BigDecimal total() {
-		BigDecimal total = new BigDecimal("0");
-		for(Sellable item : basket){
-			total = total.add(item.getPrice());
-		}
-		
+	public BigDecimal getTotal() {
 		return total;
+	}
+
+	public BigDecimal getDiscountedTotal() {
+		return discountedTotal;
+	}
+
+	public void setDiscountedTotal(BigDecimal discountedTotal) {
+		this.discountedTotal = discountedTotal;
 	}
 	
 }

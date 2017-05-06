@@ -22,13 +22,13 @@ public class CustomerTest {
 	
 	@Test
 	public void custBasketStartsEmpty(){
-		assertEquals(0, customer.getBasket().size());
+		assertEquals(0, customer.getBasketArray().size());
 	}
 	
 	@Test
 	public void canAddToCustBasket(){
 		customer.addToBasket(fItem1);
-		assertEquals(1, customer.getBasket().size());
+		assertEquals(1, customer.getBasketArray().size());
 	}
 	
 	@Test

@@ -1,7 +1,7 @@
 import java.math.BigDecimal;
 
 public interface Discounting {
-	public boolean checkCondition(BigDecimal runningTotal);
+	public boolean checkCondition(Customer customer);
 	
-	public BigDecimal findNewTotal(BigDecimal runningTotal);
+	public BigDecimal findNewTotal(Customer customer);
 }
