@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class DiscountPercentageWhenTotalExceeds implements Discounting {
 	
@@ -25,9 +26,13 @@ public class DiscountPercentageWhenTotalExceeds implements Discounting {
 
 	@Override
 	public BigDecimal findNewTotal(Customer customer) {
-		BigDecimal percentageRemaining = new BigDecimal("1").subtract(percentageOff);
-		BigDecimal newTotal  = customer.getBasketObject().getTotal().multiply(percentageRemaining);
-		return newTotal;
+		if (checkCondition(customer)){
+			BigDecimal percentageRemaining = new BigDecimal("1").subtract(percentageOff);
+			BigDecimal newTotal  = customer.getBasketObject().getDiscountedTotal().multiply(percentageRemaining);
+			customer.getBasketObject().setDiscountedTotal(newTotal);
+			return newTotal.setScale(2, RoundingMode.HALF_UP);
+		}
+			return customer.getBasketObject().getDiscountedTotal();
 	}
 
 	public String getPosition() {

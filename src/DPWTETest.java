@@ -47,7 +47,18 @@ public class DPWTETest {
 		customer.addToBasket(fItem1);
 		customer.addToBasket(fItem2);
 		BigDecimal newTotal = tenperoffovertwenty.findNewTotal(customer);
-		assertEquals(new BigDecimal("18.9"), newTotal);
+		assertEquals(new BigDecimal("18.90"), newTotal);
+		assertEquals(new BigDecimal("18.90"), customer.getBasketObject().getDiscountedTotal());
+		assertEquals(new BigDecimal("21.00"), customer.getBasketObject().getTotal());
+	}
+	
+	@Test
+	public void doesntDiscountsBasket(){
+		customer.addToBasket(fItem1);
+		BigDecimal newTotal = tenperoffovertwenty.findNewTotal(customer);
+		assertEquals(new BigDecimal("20.00"), newTotal);
+		assertEquals(new BigDecimal("20.00"), customer.getBasketObject().getDiscountedTotal());
+		assertEquals(new BigDecimal("20.00"), customer.getBasketObject().getTotal());
 	}
 
 }

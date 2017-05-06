@@ -39,8 +39,17 @@ public class DPILTest {
 	public void discountsBasket(){
 		customer.addToBasket(fItem1);
 		customer.addToBasket(fItem2);
+		customer.setLoyaltyCard(true);
 		BigDecimal newTotal = twoPerOffIfLoyal.findNewTotal(customer);
 		assertEquals(new BigDecimal("20.58"), newTotal);
+	}
+	
+	@Test
+	public void doesntDiscountBasket(){
+		customer.addToBasket(fItem1);
+		customer.addToBasket(fItem2);
+		BigDecimal newTotal = twoPerOffIfLoyal.findNewTotal(customer);
+		assertEquals(new BigDecimal("21.00"), newTotal);
 	}
 
 }

@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class DiscountBOGOF implements Discounting {
 	
@@ -26,23 +27,28 @@ public class DiscountBOGOF implements Discounting {
 
 	@Override
 	public BigDecimal findNewTotal(Customer customer) {
-		int counter = 0;
-		BigDecimal baseItemPrice = itemToDiscount.getPrice();
-		for (Sellable itemInArray : customer.getBasketArray()){
-			if (itemToDiscount.getName().equals(itemInArray.getName())){
-				counter++;
+		if (checkCondition(customer)){		
+			int counter = 0;
+			BigDecimal baseItemPrice = itemToDiscount.getPrice();
+			for (Sellable itemInArray : customer.getBasketArray()){
+				if (itemToDiscount.getName().equals(itemInArray.getName())){
+					counter++;
+				}
+			}
+			if ((counter % 2) == 0 ){
+				BigDecimal amountToDiscount = new BigDecimal(String.valueOf(counter/2)).multiply(baseItemPrice);
+				BigDecimal newTotal = customer.basketTotal().subtract(amountToDiscount);
+				customer.getBasketObject().setDiscountedTotal(newTotal);
+				return newTotal.setScale(2, RoundingMode.HALF_UP);
+			} else {
+				BigDecimal amountToDiscount = new BigDecimal(String.valueOf(((counter-1)/2)))
+						.multiply(baseItemPrice);
+				BigDecimal newTotal = customer.basketTotal().subtract(amountToDiscount);
+				customer.getBasketObject().setDiscountedTotal(newTotal);
+				return newTotal.setScale(2, RoundingMode.HALF_UP);
 			}
 		}
-		if ((counter % 2) == 0 ){
-			BigDecimal amountToDiscount = new BigDecimal(String.valueOf(counter/2)).multiply(baseItemPrice);
-			BigDecimal newTotal = customer.basketTotal().subtract(amountToDiscount);
-			return newTotal;
-		} else {
-			BigDecimal amountToDiscount = new BigDecimal(String.valueOf(((counter-1)/2)))
-					.multiply(baseItemPrice);
-			BigDecimal newTotal = customer.basketTotal().subtract(amountToDiscount);
-			return newTotal;
-		}
+		return customer.getBasketObject().getDiscountedTotal();
 	}
 
 	public String getPosition() {

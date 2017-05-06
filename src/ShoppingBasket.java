@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class ShoppingBasket {
@@ -10,7 +11,7 @@ public class ShoppingBasket {
 	public ShoppingBasket(){
 		this.basket = new ArrayList<Sellable>();
 		this.total = BigDecimal.ZERO;
-		this.setDiscountedTotal(BigDecimal.ZERO);
+		this.discountedTotal = BigDecimal.ZERO;
 	}
 	
 	public ArrayList<Sellable> getBasket(){
@@ -20,11 +21,13 @@ public class ShoppingBasket {
 	public void addToBasket(Sellable item){
         basket.add(item);
         total = total.add(item.getPrice());
+        discountedTotal = discountedTotal.add(item.getPrice());
     }
 	
 	public void removeFromBasket(Sellable item){
 		basket.remove(item);
 		total = total.subtract(item.getPrice());
+		discountedTotal = discountedTotal.subtract(item.getPrice());
 	}
 
     public int amountOfItems(){
@@ -33,18 +36,20 @@ public class ShoppingBasket {
     
     public void emptyBasket(){
     	basket.clear();
+    	total = BigDecimal.ZERO;
+		discountedTotal = BigDecimal.ZERO;
     }
 
 	public BigDecimal getTotal() {
-		return total;
+		return total.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public BigDecimal getDiscountedTotal() {
-		return discountedTotal;
+		return discountedTotal.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public void setDiscountedTotal(BigDecimal discountedTotal) {
-		this.discountedTotal = discountedTotal;
+		this.discountedTotal = discountedTotal.setScale(2, RoundingMode.HALF_UP);
 	}
 	
 }

@@ -39,7 +39,7 @@ public class ShoppingBasketTest {
 		basket1.addToBasket(gItem1);
 		basket1.removeFromBasket(fItem1);
 		assertEquals(1, basket1.amountOfItems());
-		assertEquals(new BigDecimal("2"),basket1.getTotal());
+		assertEquals(new BigDecimal("2.00"),basket1.getTotal());
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class ShoppingBasketTest {
 	public void canGetTotalValue(){
 		basket1.addToBasket(fItem1);
 		basket1.addToBasket(gItem1);
-		assertEquals(new BigDecimal("3"), basket1.getTotal());
+		assertEquals(new BigDecimal("3.00"), basket1.getTotal());
 	}
 
 
